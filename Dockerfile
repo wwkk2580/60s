@@ -10,5 +10,8 @@ COPY . .
 # 安装 Deno 脚本
 RUN deno install --global --allow-read --allow-net -n deno-app deno.ts
 
+# 暴露 4399 端口
+EXPOSE 4399
+
 # 使用已安装的命令执行
 CMD ["deno-app"]
