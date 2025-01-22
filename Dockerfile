@@ -1,5 +1,5 @@
 # 使用精简的 Node.js Alpine 镜像
-FROM node:20-alpine AS builder
+FROM node:23-alpine AS builder
 
 # 设置工作目录
 WORKDIR /app
