@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # 安装 Deno 脚本
-RUN deno install --allow-read --allow-net -n deno-app deno.ts
+RUN deno install --global --allow-read --allow-net -n deno-app deno.ts
 
 # 使用已安装的命令执行
 CMD ["deno-app"]
