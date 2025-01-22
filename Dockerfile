@@ -1,17 +1,17 @@
-# 使用官方的 Deno 镜像
-FROM denoland/deno:alpine-1.29.0
+# 使用 Node.js 官方镜像，确保版本 >= 22.6
+FROM node:22.6
 
 # 设置工作目录
 WORKDIR /app
 
-# 将项目文件复制到容器中
+# 复制项目文件到工作目录
 COPY . .
 
-# 安装依赖并运行项目
-RUN deno install && deno run -A deno.ts
+# 安装依赖
+RUN npm install
 
-# 暴露容器的端口，设置为 4399
+# 暴露容器端口
 EXPOSE 4399
 
-# 运行应用程序
-CMD ["deno", "run", "-A", "deno.ts"]
+# 运行 TypeScript 文件，支持 --experimental-strip-types
+CMD ["node", "--experimental-strip-types", "node.ts"]
