@@ -1,5 +1,5 @@
 # 使用官方 Deno 镜像
-FROM denoland/deno:alpine-1.30.0
+FROM denoland/deno:alpine
 
 # 设置工作目录
 WORKDIR /app
