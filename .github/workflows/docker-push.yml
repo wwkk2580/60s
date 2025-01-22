@@ -1,8 +1,12 @@
 name: Build and Push Docker Image to GHCR
 
-# 手动触发工作流
 on:
-  workflow_dispatch:  # 允许手动触发此工作流
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Docker image tag'
+        required: false
+        default: 'latest'
 
 jobs:
   build:
@@ -18,14 +22,14 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}  # 使用 GITHUB_TOKEN 进行身份验证
+          password: ${{ secrets.TOKEN }}  # 使用 TOKEN 进行身份验证
 
       # 构建 Docker 镜像
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/60s:latest .
+          docker build -t ghcr.io/${{ github.repository }}/60s:${{ github.event.inputs.tag }} .
 
       # 推送 Docker 镜像到 GitHub Container Registry
       - name: Push Docker image
         run: |
-          docker push ghcr.io/${{ github.repository }}/60s:latest
+          docker push ghcr.io/${{ github.repository }}/60s:${{ github.event.inputs.tag }}
